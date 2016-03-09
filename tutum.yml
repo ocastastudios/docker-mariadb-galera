@@ -20,7 +20,7 @@ MariadbGalera:
   volumes:
     - /var/lib/mysql
 MariadbProxy:
-  image: 'haproxy:latest'
+  image: 'tutum/haproxy:latest'
   expose:
     - '80'
     - '443'

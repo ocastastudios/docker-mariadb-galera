@@ -1,5 +1,5 @@
 #!/bin/sh
-curl -s -H "Authorization: $DOCKERCLOUD_AUTH" $DOCKERCLOUD_SERVICE_API_URL | jq '.' | grep ENV_DOCKERCLOUD_IP_ADDRESS | grep -v ${DOCKERCLOUD_IP_ADDRESS} | awk -F\" '{print $4}' | awk -F\/ '{print $1}' | sort -u
+T=$(curl -s -H "Authorization: $DOCKERCLOUD_AUTH" $DOCKERCLOUD_SERVICE_API_URL | jq '.' | grep ENV_DOCKERCLOUD_IP_ADDRESS | grep -v ${DOCKERCLOUD_IP_ADDRESS} | awk -F\" '{print $4}' | awk -F\/ '{print $1}' | sort -u)FRep
 CLUSTER=""
 for Y in $T; do
     CLUSTER="${CLUSTER}${Y},"

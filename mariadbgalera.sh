@@ -1,5 +1,5 @@
 #!/bin/sh
-T=$(curl -s -H "Authorization: $TUTUM_AUTH" -H "Accept: application/json" $TUTUM_SERVICE_API_URL | jq '.' | grep ENV_TUTUM_IP_ADDRESS | grep -v ${TUTUM_IP_ADDRESS} | awk -F\" '{print $4}' | awk -F\/ '{print $1}' | sort -u)
+curl -s -H "Authorization: $DOCKERCLOUD_AUTH" $DOCKERCLOUD_SERVICE_API_URL | jq '.' | grep ENV_DOCKERCLOUD_IP_ADDRESS | grep -v ${DOCKERCLOUD_IP_ADDRESS} | awk -F\" '{print $4}' | awk -F\/ '{print $1}' | sort -u
 CLUSTER=""
 for Y in $T; do
     CLUSTER="${CLUSTER}${Y},"
@@ -13,7 +13,7 @@ done
 chown -R mysql:mysql /var/lib/mysql
 
 CLUSTER="${CLUSTER%?}"
-NODE_ADDR=$(echo ${TUTUM_IP_ADDRESS} | awk -F\/ '{print $1}')
+NODE_ADDR=$(echo ${DOCKERCLOUD_IP_ADDRESS} | awk -F\/ '{print $1}')
 
 VOLUME_HOME="/var/lib/mysql"
 

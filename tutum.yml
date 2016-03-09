@@ -1,5 +1,5 @@
 MariadbGalera:
-  image: 'murf/mariadbgalera:latest'
+  image: 'ocasta/mariadbgalera:latest'
   deployment_strategy: high_availability
   environment:
     - BALANCE=leastconn
@@ -20,7 +20,7 @@ MariadbGalera:
   volumes:
     - /var/lib/mysql
 MariadbProxy:
-  image: 'tutum/haproxy:latest'
+  image: 'haproxy:latest'
   expose:
     - '80'
     - '443'

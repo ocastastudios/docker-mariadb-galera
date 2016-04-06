@@ -22,6 +22,9 @@ RUN chmod 755 /etc/mysql/clustercheck.sh
 RUN mkdir /etc/service/mariadbhealth
 ADD mariadbhealth.sh /etc/service/mariadbhealth/run
 RUN chmod 755 /etc/service/mariadbhealth/run
+ADD go_cron.sh /etc/service/gocron/run
+ADD backup.sh /etc/service/gocron/backup.sh
+RUN chmod 755 /etc/service/gocron/*
 
 expose 3306 4567 4568 4444 9200
 

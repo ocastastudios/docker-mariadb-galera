@@ -25,7 +25,6 @@ chmod u+x /usr/local/bin/gof3r
 
 curl -L --insecure https://github.com/odise/go-cron/releases/download/v0.0.6/go-cron-linux.gz | zcat > /usr/local/bin/go-cron
 chmod u+x /usr/local/bin/go-cron
-apt-get -y remove curl
 
 apt-get -y autoremove
 apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*

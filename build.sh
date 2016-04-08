@@ -19,12 +19,16 @@ apt-get update
 apt-get --no-install-recommends -y upgrade
 
 # gof3r for s3 commands and go-cron to schedule backups
-apt-get --no-install-recommends install -y iproute mariadb-server galera-3 pv iputils-ping net-tools jq percona-xtrabackup socat nmap curl
+apt-get --no-install-recommends install -y iproute mariadb-server galera-3 pv iputils-ping net-tools percona-xtrabackup socat nmap curl
 curl -L --insecure https://github.com/rlmcpherson/s3gof3r/releases/download/v0.5.0/gof3r_0.5.0_linux_amd64.tar.gz | zcat > /usr/local/bin/gof3r
 chmod u+x /usr/local/bin/gof3r
 
 curl -L --insecure https://github.com/odise/go-cron/releases/download/v0.0.6/go-cron-linux.gz | zcat > /usr/local/bin/go-cron
 chmod u+x /usr/local/bin/go-cron
+
+# Latest jq
+curl -L --insecure https://github.com/stedolan/jq/releases/download/jq-1.5/jq-linux64 > /usr/bin/jq
+chmod u+x /usr/bin/jq
 
 apt-get -y autoremove
 apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*

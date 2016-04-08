@@ -1,5 +1,5 @@
 #!/bin/sh
-T=$(curl -s -H "Authorization: $DOCKERCLOUD_AUTH" $DOCKERCLOUD_SERVICE_API_URL | jq '.calculated_envvars[] | select(.key | test ("ENV_DOCKERCLOUD_IP_ADDRESS")).value' | sort -u)
+T=$(curl -s -H "Authorization: $DOCKERCLOUD_AUTH" $DOCKERCLOUD_SERVICE_API_URL | jq --raw-output '.calculated_envvars[] | select(.key | test ("ENV_DOCKERCLOUD_IP_ADDRESS")).value' | awk -F\/ '{print $1}' | sort -u)
 CLUSTER=""
 for Y in $T; do
     CLUSTER="${CLUSTER}${Y},"

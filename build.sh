@@ -26,7 +26,7 @@ curl -O https://storage.googleapis.com/golang/go1.6.linux-amd64.tar.gz
 tar -xvf go1.6.linux-amd64.tar.gz
 mv go /usr/local
 ln -s /usr/local/go/bin/go /usr/bin/go
-export GOPATH=/usr/local/bin
+export GOPATH=/usr/local
 go get github.com/rlmcpherson/s3gof3r/gof3r
 
 curl -L --insecure https://github.com/odise/go-cron/releases/download/v0.0.6/go-cron-linux.gz | zcat > /usr/local/bin/go-cron

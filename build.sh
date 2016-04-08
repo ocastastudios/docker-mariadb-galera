@@ -17,11 +17,17 @@ apt-key adv --keyserver keys.gnupg.net --recv-keys 1C4CBDCDCD2EFD2A
 add-apt-repository 'deb http://repo.percona.com/apt trusty main'
 apt-get update
 apt-get --no-install-recommends -y upgrade
+apt-get --no-install-recommends install -y iproute mariadb-server galera-3 pv iputils-ping net-tools percona-xtrabackup socat nmap curl
 
 # gof3r for s3 commands and go-cron to schedule backups
-apt-get --no-install-recommends install -y iproute mariadb-server galera-3 pv iputils-ping net-tools percona-xtrabackup socat nmap curl
-curl -L --insecure https://github.com/rlmcpherson/s3gof3r/releases/download/v0.5.0/gof3r_0.5.0_linux_amd64.tar.gz | zcat > /usr/local/bin/gof3r
-chmod u+x /usr/local/bin/gof3r
+# need to build gof3r from source as the binary doesnt work
+apt-get -y install git
+curl -O https://storage.googleapis.com/golang/go1.6.linux-amd64.tar.gz
+tar -xvf go1.6.linux-amd64.tar.gz
+mv go /usr/local
+ln -s /usr/local/go/bin/go /usr/bin/go
+export GOPATH=/usr/local/bin
+go get github.com/rlmcpherson/s3gof3r/gof3r
 
 curl -L --insecure https://github.com/odise/go-cron/releases/download/v0.0.6/go-cron-linux.gz | zcat > /usr/local/bin/go-cron
 chmod u+x /usr/local/bin/go-cron

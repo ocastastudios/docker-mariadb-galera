@@ -3,5 +3,5 @@
 set -e
 
 if [ "${SCHEDULE}" != "**None**" ]; then
-  exec go-cron "$SCHEDULE" /bin/sh /etc/service/gocron/backup.sh
+  exec go-cron -s "$SCHEDULE" -- /bin/bash -c "/etc/service/gocron/backup.sh"
 fi

@@ -18,6 +18,7 @@ apt-get -y install wget
 wget "https://repo.percona.com/apt/percona-release_0.1-4.$(lsb_release -sc)_all.deb"
 dpkg -i percona-release_0.1-4.$(lsb_release -sc)_all.deb
 apt-get -y update
+apt-get --no-install-recommends -y upgrade
 apt-get --no-install-recommends install -y iproute mariadb-server galera-3 pv iputils-ping net-tools percona-xtrabackup-24 socat nmap curl
 
 # gof3r for s3 commands and go-cron to schedule backups

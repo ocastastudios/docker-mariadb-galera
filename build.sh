@@ -9,15 +9,16 @@ export TERM=dumb
 ln -s -f /bin/true /usr/bin/chfn
 
 # Install MariaDB
-apt-get --no-install-recommends install  -y software-properties-common
-apt-key adv --recv-keys --keyserver hkp://keyserver.ubuntu.com:80 0xcbcb082a1bb943db
-add-apt-repository 'deb [arch=amd64,i386] http://ftp.ddg.lth.se/mariadb/repo/10.1/ubuntu trusty main'
+apt-get install software-properties-common
+apt-key adv --recv-keys --keyserver hkp://keyserver.ubuntu.com:80 0xF1656F24C74CD1D8
+add-apt-repository 'deb [arch=amd64,i386,ppc64el] http://mirror.sax.uk.as61049.net/mariadb/repo/10.1/ubuntu xenial main'
 
-apt-key adv --keyserver keys.gnupg.net --recv-keys 1C4CBDCDCD2EFD2A
-add-apt-repository 'deb http://repo.percona.com/apt trusty main'
-apt-get update
-apt-get --no-install-recommends -y upgrade
-apt-get --no-install-recommends install -y iproute mariadb-server galera-3 pv iputils-ping net-tools percona-xtrabackup socat nmap curl
+apt-get -y update
+apt-get -y install wget
+wget "https://repo.percona.com/apt/percona-release_0.1-4.$(lsb_release -sc)_all.deb"
+dpkg -i percona-release_0.1-4.$(lsb_release -sc)_all.deb
+apt-get -y update
+apt-get --no-install-recommends install -y iproute mariadb-server galera-3 pv iputils-ping net-tools percona-xtrabackup-24 socat nmap curl
 
 # gof3r for s3 commands and go-cron to schedule backups
 # need to build gof3r from source as the binary doesnt work

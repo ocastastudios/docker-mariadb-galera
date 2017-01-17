@@ -11,7 +11,7 @@ ln -s -f /bin/true /usr/bin/chfn
 # Install MariaDB
 apt-get install software-properties-common
 apt-key adv --recv-keys --keyserver hkp://keyserver.ubuntu.com:80 0xF1656F24C74CD1D8
-add-apt-repository 'deb [arch=amd64,i386,ppc64el] http://mirror.sax.uk.as61049.net/mariadb/repo/10.1/ubuntu xenial main'
+add-apt-repository 'deb [arch=amd64,i386,ppc64el] http://nyc2.mirrors.digitalocean.com/mariadb/repo/10.1/ubuntu xenial main'
 
 apt-get -y update
 apt-get -y install wget

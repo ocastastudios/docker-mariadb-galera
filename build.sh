@@ -16,10 +16,15 @@ add-apt-repository 'deb [arch=amd64,i386,ppc64el] http://nyc2.mirrors.digitaloce
 apt-get -y update
 apt-get -y install wget
 wget "https://repo.percona.com/apt/percona-release_0.1-4.$(lsb_release -sc)_all.deb"
+
+# s3cmd
+wget -O- -q http://s3tools.org/repo/deb-all/stable/s3tools.key | apt-key add -
+wget -O/etc/apt/sources.list.d/s3tools.list http://s3tools.org/repo/deb-all/stable/s3tools.list
+
 dpkg -i percona-release_0.1-4.$(lsb_release -sc)_all.deb
 apt-get -y update
 apt-get --no-install-recommends -y upgrade
-apt-get --no-install-recommends install -y iproute mariadb-server galera-3 pv iputils-ping net-tools percona-xtrabackup-24 socat nmap curl
+apt-get --no-install-recommends install -y iproute mariadb-server galera-3 pv iputils-ping net-tools percona-xtrabackup-24 socat nmap curl qpress s3cmd
 
 # gof3r for s3 commands and go-cron to schedule backups
 # need to build gof3r from source as the binary doesnt work

@@ -16,7 +16,7 @@ wsrep_sst_auth=<SST_REPLICATION_SQL_USER>:<PASSWORD_FOR_SQL_USER>
 ```
 
 #HA Proxy
-When using the Dockercloud settings the tutum.yaml stackfile can be used.
+When using the Dockercloud settings the dockercompose.yml stackfile can be used.
 The extra environment variables for MariaDB containers setup the tcp-proxy settings. 
 And a tiny netcat shell-script server serves status of the instance.
 Additional environment variables needed in the mariadb container: 
@@ -36,8 +36,24 @@ In a galera cluster when a node joins a full master drops out to do the initial 
 ##Mitigation
 Only add new nodes when all current nodes are full masters
 
+#Backup
+The `:s3backup` version of this container can be run as part of a cluster of non-backup MariaDBGalera 
+containers and will perform backups to s3 dependant on the configured cron schedule
+
 ### Automatic Periodic Backups
 
 You can set the `SCHEDULE` environment variable like `-e SCHEDULE="@daily"` to run the backup automatically.
 More information about the scheduling can be found 
 [here](http://godoc.org/github.com/robfig/cron#hdr-Predefined_schedules).
+
+
+### Restoring from backup
+
+This container also contains a script to restore a backup from s3. The container should not be part of a cluster when 
+perfomring a restore. To run a restore an additional environment needs to be set `RESTORE_FILENAME` which contains 
+the name of the file to copy from s3 and restore from. In order to restore run the container and execute
+the command:
+
+    /usr/local/bin/s3restore.sh
+   
+This will restore the database to the _/var/lib/mysql_ directory
